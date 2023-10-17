@@ -63,7 +63,8 @@ export const Login=()=>{
                                     // const temp=btoa(user);
                                     // alert(temp) 
                                     const t=await Loadempdetails(user);
-                                    return t;
+                                    // alert(t.);
+                                    window.location.assign("/");
                                 }}>
                                     <i class="bi bi-box-arrow-in-right"></i>Plugin
                                 </button>

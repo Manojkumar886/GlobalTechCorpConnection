@@ -1,6 +1,7 @@
 import { useState } from "react"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css" 
+import { join } from "./Connect"
 export const Register=()=>
 {
     const[process,setProcess]=useState({
@@ -29,6 +30,8 @@ export const Register=()=>
 
     const regis=async()=>{
         alert("Welcome to zealous Tech Corp"+JSON.stringify(process))
+        const temp=await join(process);
+        alert(temp.data);
     }
     const reset=()=>
     {
