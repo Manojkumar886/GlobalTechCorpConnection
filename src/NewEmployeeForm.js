@@ -32,6 +32,7 @@ export const Register=()=>
         alert("Welcome to zealous Tech Corp"+JSON.stringify(process))
         const temp=await join(process);
         alert(temp.data);
+        window.location.assign("/");
     }
     const reset=()=>
     {

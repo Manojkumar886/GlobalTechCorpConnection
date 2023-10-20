@@ -60,7 +60,7 @@ export const logout=async()=>
 
 export const addSlip=async(slip)=>
 {
-    // alert(" before to add back end"+JSON.stringify(slip));
+    alert(" before to add back end"+JSON.stringify(slip));
     const t=await axios.post(`${mylink}/createpayslip/${sessionStorage.getItem('employee')}`,slip,{
         headers:{
             "Authorization":`Basic ${sessionStorage.getItem('user')}`
@@ -68,3 +68,39 @@ export const addSlip=async(slip)=>
     })
     return t;
 }
+
+
+export const onQuit=async()=>
+{
+    const t=await axios.delete(`${mylink}/deleteone/${sessionStorage.getItem('employee')}`,{
+        headers:{
+            "Authorization":`Basic ${sessionStorage.getItem('user')}`
+        }
+    })
+    sessionStorage.removeItem("employee");
+    sessionStorage.removeItem("user")
+    return t;
+}
+
+export const onUpdate=async(obj)=>
+{
+    const t=await axios.put(`${mylink}/update`,obj,{
+        headers:{
+            "Authorization":`Basic ${sessionStorage.getItem('user')}`
+        }
+    })
+    return t;
+}
+
+
+export const getDetails=async()=>
+{
+    const t=await axios.get(`${mylink}/${sessionStorage.getItem('employee')}`,{
+        headers:{
+            "Authorization":`Basic ${sessionStorage.getItem('user')}`
+        }
+    })
+    return t;
+}
+
+

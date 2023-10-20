@@ -2,7 +2,7 @@ import {Button, Nav, Navbar, NavbarBrand, NavbarCollapse, NavbarToggle} from 're
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import BadgeSharpIcon from '@mui/icons-material/BadgeSharp';
-import { logout } from './Connect';
+import { logout, onQuit } from './Connect';
 
 export const Homepage=()=>
 {
@@ -22,7 +22,14 @@ export const Homepage=()=>
                             alert(d.data);
 
                         }}>PLUG OUT</button>
-                        <button  className="btn btn-danger ms-1 col-6">ABANDON</button>
+                        <button  className="btn btn-danger ms-1 col-6"
+                        onClick={async()=>
+                        {
+                            const d=await onQuit();
+                            alert(d.data);
+                            window.location.assign("/")
+                        }}
+                        >ABANDON</button>
                     </Nav>
                 </NavbarCollapse>
             </Navbar>
