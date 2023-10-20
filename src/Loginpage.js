@@ -2,15 +2,15 @@ import { useState } from "react"
 import { Register } from "./NewEmployeeForm"
 import Person4SharpIcon from '@mui/icons-material/Person4Sharp';
 import KeySharpIcon from '@mui/icons-material/KeySharp';
-import { Loadempdetails } from "./Connect";
+import { loadEmp } from "./Connect";
 
 export const Login=()=>{
 
     const[cview,setCview]=useState(false)
 
     const[user,setUser]=useState({
-        "username":"",
-        "password":""
+        "empUsername":"",
+        "empPassword":""
     })
 
     const onPerform=(eve)=>{
@@ -42,7 +42,8 @@ export const Login=()=>{
                                 <input 
                                 type="text" 
                                 onChange={onPerform} 
-                                value={user.username} name="username" 
+                                value={user.empUsername} 
+                                name="empUsername" 
                                 placeholder="Username please"
                                 className="form-control" />
                             </div>
@@ -51,7 +52,8 @@ export const Login=()=>{
                                 <input 
                                 type="password" 
                                 onChange={onPerform} 
-                                value={user.password} name="password" 
+                                value={user.empPassword} 
+                                name="empPassword" 
                                 placeholder="Password please" 
                                 className="form-control" />
                             </div>
@@ -62,7 +64,7 @@ export const Login=()=>{
                                      // alert(user.username+":"+user.password);
                                     // const temp=btoa(user);
                                     // alert(temp) 
-                                    const t=await Loadempdetails(user);
+                                    const t=await loadEmp(user);
                                     // alert(t.);
                                     window.location.assign("/");
                                 }}>

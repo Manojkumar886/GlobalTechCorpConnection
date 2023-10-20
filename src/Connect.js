@@ -8,30 +8,26 @@ const mylink="http://localhost:8082/ZealousEmpDetails"
 
 // async,await
 
-export const Loadempdetails=async(obj)=>
-{
-   try
-   {
-    const details=obj.username+":"+obj.password;
-    const token=btoa(details);
-
-    const temp=await axios.get(`${mylink}/{obj.username}`,{
-        headers:{
-            "Authorization":`Basic ${token}`
+export const loadEmp=async(obj)=>{
+    try{
+        const txt=obj.empUsername+":"+obj.empPassword
+        const token=btoa(txt)
+        const t = await axios.get(`${mylink}/${obj.empUsername}`,{
+            headers:{
+                "Authorization":`Basic ${token}`
+            }
+        })
+        if(t.data)
+        {
+            sessionStorage.setItem("employee",obj.empUsername)
+            sessionStorage.setItem("user",token)
+            return t
         }
-    })
-    if(temp.data)
-    {
-        sessionStorage.setItem("mydetails",token);
-        return temp;
     }
-   }
-   catch(err)
-   {
-    alert(" invaild"+err);
-   }
+    catch(err){
+        alert("invalid")
+    }
 }
-
 
 export const join=async(object)=>
 {
@@ -40,4 +36,35 @@ export const join=async(object)=>
     alert(JSON.stringify(temp.data)+" has been added successfully ");
 
     return temp;
+}
+
+
+export const loadSlips=async()=>
+{
+    const temp=await axios.get(`${mylink}/fetch/${sessionStorage.getItem('employee')}`,
+    {
+        headers:{
+            "Authorization":`Basic ${sessionStorage.getItem('user')}`
+        }
+    })
+    return temp;
+}
+
+export const logout=async()=>
+{
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('employee');
+    window.location.assign("/")
+    return;
+}
+
+export const addSlip=async(slip)=>
+{
+    // alert(" before to add back end"+JSON.stringify(slip));
+    const t=await axios.post(`${mylink}/createpayslip/${sessionStorage.getItem('employee')}`,slip,{
+        headers:{
+            "Authorization":`Basic ${sessionStorage.getItem('user')}`
+        }
+    })
+    return t;
 }
